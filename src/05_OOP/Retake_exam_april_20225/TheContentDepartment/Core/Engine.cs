@@ -27,7 +27,7 @@ namespace TheContentDepartment.Core
                 string[] input = reader.ReadLine().Split();
                 if (input[0] == "Exit")
                 {
-                    Console.WriteLine(sb.ToString());
+                    //Console.WriteLine(sb.ToString());
                     Environment.Exit(0);
                 }
                 try
@@ -67,15 +67,15 @@ namespace TheContentDepartment.Core
                     {
                         result = controller.DepartmentReport();
                     }
-                    //writer.WriteLine(result);
-                    //writer.WriteText(result);
-                    sb.AppendLine(result);
+                    writer.WriteLine(result);
+                    writer.WriteText(result);
+                    //sb.AppendLine(result);
                 }
                 catch (Exception ex)
                 {
-                    //writer.WriteLine(ex.Message);
-                    //writer.WriteText(ex.Message);
-                    sb.AppendLine($"{ex.Message}");
+                    writer.WriteLine(ex.Message);
+                    writer.WriteText(ex.Message);
+                    //sb.AppendLine($"{ex.Message}");
                 }
             }
 

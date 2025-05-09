@@ -35,7 +35,7 @@ namespace TheContentDepartment.Core
 
             var teamLead = members.Models.FirstOrDefault(x => x.GetType().Name == "TeamLead");
 
-            if (resource.IsApproved)
+            if (isApprovedByTeamLead)
             {
                 resource.Approve();
                 teamLead!.FinishTask(resource.Name);
@@ -68,24 +68,24 @@ namespace TheContentDepartment.Core
 
             var creatorName = matchedResource.Name;
 
-            switch (resourceType.ToLower())
+            switch (resourceType)
             {
-                case "exam":
+                case "Exam":
                     newResource = new Exam(resourceName, creatorName);
                     break;
 
-                case "workshop":
+                case "Workshop":
                     newResource = new Workshop(resourceName, creatorName);
                     break;
 
-                case "presentation":
+                case "Presentation":
                     newResource = new Presentation(resourceName, creatorName);
                     break;
 
                 default:
                     return string.Format(OutputMessages.ResourceTypeInvalid, resourceType);
             }
-
+            matchedResource.WorkOnTask(resourceName);
             resources.Add(newResource);
 
             return string.Format(OutputMessages.ResourceCreatedSuccessfully, creatorName, resourceType, resourceName);
@@ -116,7 +116,7 @@ namespace TheContentDepartment.Core
 
         public string JoinTeam(string memberType, string memberName, string path)
         {
-            if (memberType.ToLower() != "teamlead" && memberType.ToLower() != "contentmember")
+            if (memberType != "TeamLead" && memberType != "ContentMember")
             {
                 return string.Format(OutputMessages.MemberTypeInvalid, memberType);
             }
@@ -134,12 +134,12 @@ namespace TheContentDepartment.Core
             }
 
             ITeamMember newMember;
-            switch (memberType.ToLower())
+            switch (memberType)
             {
-                case "teamlead":
+                case "TeamLead":
                     newMember = new TeamLead(memberName, path);
                     break;
-                case "contentmember":
+                case "ContentMember":
                     newMember = new ContentMember(memberName, path);
                     break;
                 default:
