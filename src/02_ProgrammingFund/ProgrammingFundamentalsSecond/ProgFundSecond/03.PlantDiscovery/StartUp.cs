@@ -12,7 +12,9 @@ namespace _03.PlantDiscovery
 
             for (int i = 0; i < n; i++)
             {
-                var plant = Console.ReadLine().Split(new[] { "<->" }, StringSplitOptions.None);
+                var plant = Console.ReadLine().Split(new[] { "<->" }, StringSplitOptions.None)
+                                              .Select(x => x.Trim())
+                                              .ToArray(); ;
 
                 var plantName = plant[0];
                 var rarity = int.Parse(plant[1]);
@@ -24,7 +26,7 @@ namespace _03.PlantDiscovery
                 }
                 else
                 {
-                    currentPlant.Rarity += rarity;
+                    currentPlant.Rarity = rarity;
                 }
 
             }
@@ -33,7 +35,9 @@ namespace _03.PlantDiscovery
 
             while ((command = Console.ReadLine()) != "Exhibition")
             {
-                var token = command.Split(new[] {':', '-'}, StringSplitOptions.RemoveEmptyEntries).Select(x=> x.Trim()).ToList();
+                var token = command.Split(new[] {':', '-'}, StringSplitOptions.RemoveEmptyEntries)
+                                   .Select(x=> x.Trim())
+                                   .ToList();
 
                 var commandName = token[0];
                 var commandParameters = token.Skip(1).ToList();
@@ -72,6 +76,7 @@ namespace _03.PlantDiscovery
             if (currentPlant is null)
             {
                 Console.WriteLine("error");
+                return;
             }
             currentPlant.Rating.Clear();
         }
@@ -85,6 +90,7 @@ namespace _03.PlantDiscovery
             if (currentPlant is null)
             {
                 Console.WriteLine("error");
+                return;
             }
             currentPlant.Rarity = newRarity;
         }
@@ -98,6 +104,7 @@ namespace _03.PlantDiscovery
             if (currentPlant is null)
             {
                 Console.WriteLine("error");
+                return;
             }
             currentPlant.Rating.Add(rating);
         }
