@@ -82,6 +82,17 @@ namespace SecureOpsSystem.Tests
         }
 
         [Test]
+        public void TestRemoveNonExistentToolReturnsFalse()
+        {
+            var sut = new SecureHub(1);
+            var tool = new SecurityTool("Test", "Test", 2.0);
+
+            var result = sut.RemoveTool(tool);
+
+            Assert.That(result, Is.False);
+        }
+
+        [Test]
         public void TestRemovebSuccess()
         {
             var sut = new SecureHub(2);
@@ -146,6 +157,24 @@ namespace SecureOpsSystem.Tests
                 "Test, Effectiveness: 2,00";
 
             Assert.That(actual, Is.EqualTo(expected));
+        }
+
+        [Test]
+        public void TestReportShouldOrderByEffectivenessDescending()
+        {
+            var sut = new SecureHub(2);
+            var low = new SecurityTool("Low", "Cat1", 1.0);
+            var high = new SecurityTool("High", "Cat2", 5.0);
+
+            sut.AddTool(low);
+            sut.AddTool(high);
+
+            var report = sut.SystemReport();
+
+            var firstIndex = report.IndexOf("High");
+            var secondIndex = report.IndexOf("Low");
+
+            Assert.That(firstIndex, Is.LessThan(secondIndex));
         }
     }
 }
