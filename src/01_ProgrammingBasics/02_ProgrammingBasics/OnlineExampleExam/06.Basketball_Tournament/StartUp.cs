@@ -33,8 +33,8 @@
                     totalGames++;
                 }
             }
-            Console.WriteLine($"{((decimal)(wonGames) / totalGames)*100:F2}.00% matches won");
-            Console.WriteLine($"{((decimal)(totalGames - wonGames) / totalGames)*100:F2}.00% matches lost");
+            Console.WriteLine($"{((decimal)(wonGames) / totalGames)*100:F2}% matches win");
+            Console.WriteLine($"{((decimal)(totalGames - wonGames) / totalGames)*100:F2}% matches lost");
 
         }
     }
