@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="01_PasswordReset/01_PasswordReset.csproj" />
+  <Project Path="02_FancyBarcodes/02_FancyBarcodes.csproj" />
+  <Project Path="03_Heroes_Of_Code/03_Heroes_Of_Code.csproj" />
+</Solution>
